@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>임직원 관리</title>
+    <link rel="stylesheet" href="asset/css/main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="black-bg">
+      <div class="modal-container">
+        <h3>임직원 등록</h3>
+        <form>
+          <div class="input-container">
+            이름: <input type="text" name="" id="name" placeholder="ㅇㅇ" />
+          </div>
+
+          <div class="input-container">
+            이메일: <input type="email" name="" id="email" placeholder="ㅇㅇ" />
+          </div>
+
+          <div class="input-container">
+            핸드폰번호:
+            <input type="number" name="" id="phone" placeholder="ㅇㅇ" />
+          </div>
+
+          <div class="input-container">
+            구분:
+            <input type="text" name="" id="classification" placeholder="ㅇㅇ" />
+          </div>
+
+          <div class="input-container">
+            이미지: <input type="file" name="" id="img" placeholder="ㅇㅇ" />
+          </div>
+
+          <button type="submit">등록</button>
+          <button type="button" class="close">닫기</button>
+        </form>
+      </div>
+    </div>
+    <div class="employee-container">
+      <div class="title-container">
+        <div class="title">
+          <h1>임직원관리</h1>
+        </div>
+        <div class="login">로그인</div>
+      </div>
+      <div class="edit-container">
+        <div class="button-container">
+          <button class="add-btn">임직원 등록</button>
+          <button class="remove-btn">임직원 삭제</button>
+        </div>
+        <div class="search-container">
+          icon
+          <input type="text" class="search-input" id="search-input" />
+        </div>
+      </div>
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>박스</th>
+            <th>프로필 사진</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>휴대폰 번호</th>
+            <th>구분</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>박스</td>
+            <td>프로필 사진</td>
+            <td>이름</td>
+            <td>이메일</td>
+            <td>휴대폰 번호</td>
+            <td>구분</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
+        authDomain: "fastcampusjavascript.firebaseapp.com",
+        projectId: "fastcampusjavascript",
+        storageBucket: "fastcampusjavascript.appspot.com",
+        messagingSenderId: "741337754815",
+        appId: "1:741337754815:web:c0cd01444983c91fe76a0a",
+        measurementId: "G-RRXF3L5HP6",
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      // 데이터 추가
+      $("form").on("submit", async (event) => {
+        event.preventDefault(); // 폼 제출 기본 동작 방지
+
+        let userName = $("#name").val();
+        let userEmail = $("#email").val();
+        let userPhone = $("#phone").val();
+        let userClassification = $("#classification").val();
+
+        try {
+          const docRef = await addDoc(collection(db, "employee"), {
+            name: userName,
+            email: userEmail,
+            phone: userPhone,
+            classification: userClassification,
+          });
+          console.log("Document written with ID: ", docRef.id);
+          blackContainer.removeClass('show')
+          // 여기서 추가 작업 수행 또는 메시지 표시 등을 할 수 있습니다.
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      });
+      // try {
+      //   const docRef = addDoc(collection(db, "users"), {
+      //     first: "Ada",
+      //     last: "Lovelace",
+      //     born: 1815,
+      //   });
+      //   console.log("Document written with ID: ", docRef.id);
+      // } catch (e) {
+      //   console.error("Error adding document: ", e);
+      // }})
+      //     try {
+      //       const docRef = await(collection(db, "employee"), {
+      //         name: userName,
+      //         email: userEmail,
+      //         phone: userPhone,
+      //         classification: userClassification,
+      //       });
+      //       console.log("Document written with ID: ", docRef.id);
+      //     } catch (e) {
+      //       console.error("Error adding document: ", e);
+      //     }
+      //   });
+      //   const docRef = addDoc(collection(db, "employee"), {
+      //     name: userName,
+      //     email: userEmail,
+      //     phone: userPhone,
+      //     classification: userClassification
+      //   })
+
+      //   try {
+      //     const docRef = await addDoc(collection(db, "employee"), {
+      //       first: "Ada",
+      //       last: "Lovelace",
+      //       born: 1815,
+      //     });
+      //     console.log("Document written with ID: ", docRef.id);
+      //   } catch (e) {
+      //     console.error("Error adding document: ", e);
+      //   }
+      // 데이터 읽기
+      //   const querySnapshot = await getDocs(collection(db, "product"));
+      //   querySnapshot.forEach((doc) => {
+      //     const data = doc.data();
+      //     const productId = doc.id;
+      //     const productName = data.제목; // "제목" 필드의 값을 가져옴
+      //     const productPrice = data.가격; // "가격" 필드의 값을 가져옴
+      //     console.log(`상품 ID: ${productId}`);
+      //     console.log(`상품 이름: ${productName}`);
+      //     console.log(`상품 가격: ${productPrice}`);
+      //   });
+    </script>
+    <script src="asset/js/btn.js"></script>
+  </body>
+</html>

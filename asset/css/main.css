@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+button {
+    width: 108px;
+    height: auto;
+    padding: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+input {
+    width: 100%;
+    border: none;
+}
+input:focus {
+    outline: none;
+}
+.employee-container {
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.edit-container {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-btn {
+    background-color: #0d6efd;
+    color: white;
+}
+.remove-btn {
+    color: #888;
+}
+.search-container {
+    width: 25%;
+    display: flex;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+.employee-table {
+    width: 100%;
+    height: auto;
+    margin-top: 32px;
+    
+}
+.employee-table {
+    text-align: center;
+    color: #888;
+    border-collapse: collapse;
+}
+.employee-table th {
+    padding: 16px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    padding: 30px;
+    display: none;
+}
+.show {
+    display: block;
+}
+.modal-container {
+    display : block;
+    width: 75%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.input-container input {
+    width: auto;
+    border-bottom: 1px solid black;
+}

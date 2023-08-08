@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>임직원 관리</title>
+    <link rel="stylesheet" href="asset/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>    
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+</head>
+<body>
+    <div class="black-bg">
+        <div class="modal-container">
+            <h3>임직원 등록</h3>
+            <form>
+                <div class="input-container">
+                    이름: <input type="text" name="" id="" placeholder="ㅇㅇ">
+                </div>
+                
+                <div class="input-container">
+                    이름: <input type="text" name="" id="" placeholder="ㅇㅇ">
+                </div>
+                
+                <div class="input-container">
+                    이름: <input type="text" name="" id="" placeholder="ㅇㅇ">
+                </div>
+                
+                <div class="input-container">
+                    이름: <input type="text" name="" id="" placeholder="ㅇㅇ">
+                </div>
+                
+                <div class="input-container">
+                    이름: <input type="text" name="" id="" placeholder="ㅇㅇ">
+                </div>
+                
+                <button type="submit">등록</button>
+                <button type="button" class="close">닫기</button>
+            </form>
+        </div>
+    </div>
+    <div class="employee-container">
+        <div class="title-container">
+            <div class="title">
+                <h1>임직원관리</h1>
+            </div>
+            <div class="login">로그인</div>
+        </div>
+        <div class="edit-container">
+            <div class="button-container">
+                <button class="add-btn">임직원 등록</button>
+                <button class="remove-btn">임직원 삭제</button>
+            </div>
+            <div class="search-container">icon
+                <input type="text" class="search-input" id="search-input">
+            </div>
+        </div>
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>박스</th>
+                    <th>프로필 사진</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>휴대폰 번호</th>
+                    <th>구분</th>   
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>박스</td>
+                    <td>프로필 사진</td>
+                    <td>이름</td>
+                    <td>이메일</td>
+                    <td>휴대폰 번호</td>
+                    <td>구분</td>   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="asset/js/btn.js"></script>
+</body>
+</html>

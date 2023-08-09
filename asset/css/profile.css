@@ -1,0 +1,29 @@
+.userInfo-container {
+    display: flex;
+}
+.profile-left-container {
+    width: 60%;
+    margin-right: 2rem;
+}
+.profile-right-container {
+    width: auto;
+}
+.profile-title-container {
+    padding: 1rem 1rem 1rem 0;
+    border-bottom: 2px solid #666;
+    margin-bottom: 1rem;
+}
+.userInfo-wrap {
+    display: flex;
+    padding: 0.5rem;
+    border-bottom: 1px solid #868686;
+}
+.userInfo-text {
+    width: 30%;
+    border-right: 1px solid black;
+    margin-right: 0.5rem
+}
+.profile-right-container img {
+    width: 75%;
+    height: 100%;
+}

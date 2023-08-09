@@ -22,22 +22,20 @@ let allKeys = Object.keys(localStorage);
 allKeys.forEach((key) => {
   let storedUserInfo = localStorage.getItem(key);
 
-  // JSON 형식의 사용자 정보를 객체로 변환
+
   let userInfo = JSON.parse(storedUserInfo);
 
-  // userInfo 객체를 활용하여 필요한 작업 수행
-  // 예: 출력, 특정 속성에 접근 등
   const userList = `
 <tr class = ${userInfo.name}>
-<td><input type="checkbox"></td>
+<td class='check'><input type="checkbox"></td>
 <td><img src="" id="userimg"></td>
-<td>${userInfo.name}</td>
-<td>${userInfo.email}</td>
-<td>${userInfo.phone}</td>
-<td>${userInfo.classification}</td>
+<td><span>${userInfo.name}</span></td>
+<td><span>${userInfo.email}</span></td>
+<td><span>${userInfo.phone}</span></td>
+<td><span>${userInfo.classification}</span></td>
+<td><button class='profile-btn'>수정하기</button></td>
 </tr>`;
   $("tbody").append(userList);
-  console.log(userInfo.name); // 사용자 이름 출력
 
   // 여기에 필요한 작업을 추가
 
@@ -59,7 +57,6 @@ allKeys.forEach((key) => {
       // Or inserted into an <img> element
       const img = $(`.${userInfo.name} #userimg`);
       img.attr("src", url);
-      console.log(img);
     })
     .catch((error) => {
       console.log("이미지 가져오기 실패");
@@ -67,11 +64,9 @@ allKeys.forEach((key) => {
 });
 
 $(".remove-btn").on("click", (e) => {
-  console.log("click");
   allKeys.forEach((key) => {
     let storedUserInfo = localStorage.getItem(key);
 
-    // JSON 형식의 사용자 정보를 객체로 변환
     let userInfo = JSON.parse(storedUserInfo);
 
     if ($(`.${userInfo.name} input`).prop("checked")) {
@@ -85,8 +80,7 @@ $(".remove-btn").on("click", (e) => {
         .then(() => {
           // File deleted successfully
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
 
       localStorage.removeItem(key);
     }
@@ -95,3 +89,20 @@ $(".remove-btn").on("click", (e) => {
 });
 
 
+// 프로필 버튼 클릭 이벤트 핸들러
+$(".profile-btn").on("click", function (event) {
+  const row = $(this).closest("tr");
+
+  const userName = row.find("td:nth-child(3) span").text();
+  const userEmail = row.find("td:nth-child(4) span").text();
+  const userPhone = row.find("td:nth-child(5) span").text();
+  const userClassification = row.find("td:nth-child(6) span").text();
+
+  const profileUrl = `profile.html?name=${encodeURIComponent(
+    userName
+  )}&email=${encodeURIComponent(userEmail)}&phone=${encodeURIComponent(
+    userPhone
+  )}&classification=${encodeURIComponent(userClassification)}`;
+
+  window.location.href = profileUrl;
+});

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로필</title>
+    <link rel="stylesheet" href="asset/css/main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="asset/css/profile.css">
+  </head>
+  <body>
+    <div class="employee-container">
+      <div class="title-container">
+        <div class="title">
+          <h1>임직원상세</h1>
+        </div>
+        <div class="login">로그인</div>
+      </div>
+      <div class="userInfo-container">
+        <div class="profile-left-container">
+          <div class="profile-title-container flex-wrap">
+            <h3>임직원 정보</h3>
+            <button class="edit-btn">임직원 편집</button>
+          </div>
+          <div class="userInfo-container-detail">
+            <div class="userInfo-wrap">
+              <div class="userInfo-text">이름</div>
+              <div id="user-name"></div>
+            </div>
+          </div>
+          <div class="userInfo-container-detail">
+            <div class="userInfo-wrap">
+              <div class="userInfo-text">이메일</div>
+              <div id="user-email"></div>
+            </div>
+          </div>
+          <div class="userInfo-container-detail">
+            <div class="userInfo-wrap">
+              <div class="userInfo-text">핸드폰번호</div>
+              <div id="user-phone"></div>
+            </div>
+          </div>
+          <div class="userInfo-container-detail">
+            <div class="userInfo-wrap">
+              <div class="userInfo-text">구분</div>
+              <div id="user-classification"></div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-right-container">
+            <img src="" id="userimg">
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="asset/js/profile.js"></script>
+  </body>
+</html>

@@ -17,6 +17,10 @@ input {
 input:focus {
     outline: none;
 }
+.flex-wrap {
+    display: flex;
+    justify-content: space-between;
+}
 .employee-container {
     width: 100%;
     height: auto;
@@ -74,21 +78,43 @@ input:focus {
     background-color: rgba(0,0,0,0.5);
     z-index: 10;
     padding: 30px;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s;
+    top: -100%;
 }
 .show {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    top: 0%
 }
 .modal-container {
     display : block;
-    width: 75%;
+    width: 25%;
     margin: 0 auto;
     background-color: white;
     border-radius: 5px;
     padding: 30px;
 }
 
+.input-container {
+    display: flex;
+    margin-bottom: 2rem;
+}
+.form-text-container {
+    width: 100px;
+    text-align: center;
+}
 .input-container input {
     width: auto;
     border-bottom: 1px solid black;
+}
+
+.input-container input[type="file"] {  
+    overflow: hidden;
+    border: 0;
+}
+tbody td img {
+    width: 100px;
+    height: 100px;
 }

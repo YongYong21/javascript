@@ -17,29 +17,38 @@
         <h3>임직원 등록</h3>
         <form>
           <div class="input-container">
-            이름: <input type="text" name="" id="name" placeholder="ㅇㅇ" />
+            <div class="form-text-container">이름:</div>
+            <input type="text" name="" id="name" placeholder="홍길동" />
           </div>
 
           <div class="input-container">
-            이메일: <input type="email" name="" id="email" placeholder="ㅇㅇ" />
+            <div class="form-text-container">이메일:</div>
+            <input
+              type="email"
+              name=""
+              id="email"
+              placeholder="abc@google.com"
+            />
           </div>
 
           <div class="input-container">
-            핸드폰번호:
-            <input type="number" name="" id="phone" placeholder="ㅇㅇ" />
+            <div class="form-text-container">핸드폰번호:</div>
+            <input type="text" name="" id="phone" placeholder="01012345678" />
           </div>
 
           <div class="input-container">
-            구분:
-            <input type="text" name="" id="classification" placeholder="ㅇㅇ" />
+            <div class="form-text-container">구분:</div>
+            <input type="text" name="" id="classification" placeholder="vip" />
           </div>
 
           <div class="input-container">
-            이미지: <input type="file" name="" id="img" placeholder="ㅇㅇ" />
+            <div class="form-text-container">이미지:</div>
+            <input type="file" name="" id="img" placeholder="ㅇㅇ" />
           </div>
-
-          <button type="submit">등록</button>
-          <button type="button" class="close">닫기</button>
+          <div class="flex-wrap">
+            <button type="submit">등록</button>
+            <button type="button" class="close">닫기</button>
+          </div>
         </form>
       </div>
     </div>
@@ -72,18 +81,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>박스</td>
-            <td>프로필 사진</td>
-            <td>이름</td>
-            <td>이메일</td>
-            <td>휴대폰 번호</td>
-            <td>구분</td>
-          </tr>
         </tbody>
       </table>
     </div>
-
+    
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
       import {
@@ -92,7 +93,11 @@
         getDocs,
         addDoc,
       } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+      } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
       const firebaseConfig = {
         apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
         authDomain: "fastcampusjavascript.firebaseapp.com",
@@ -102,70 +107,53 @@
         appId: "1:741337754815:web:c0cd01444983c91fe76a0a",
         measurementId: "G-RRXF3L5HP6",
       };
+
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
+      const storage = getStorage();
+
       // 데이터 추가
       $("form").on("submit", async (event) => {
         event.preventDefault(); // 폼 제출 기본 동작 방지
-
+        let file = $("#img")[0].files[0];
         let userName = $("#name").val();
         let userEmail = $("#email").val();
         let userPhone = $("#phone").val();
         let userClassification = $("#classification").val();
 
-        try {
-          const docRef = await addDoc(collection(db, "employee"), {
-            name: userName,
-            email: userEmail,
-            phone: userPhone,
-            classification: userClassification,
-          });
-          console.log("Document written with ID: ", docRef.id);
-          blackContainer.removeClass('show')
-          // 여기서 추가 작업 수행 또는 메시지 표시 등을 할 수 있습니다.
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
+        const storageRef = ref(storage, "image/" + userName);
+        uploadBytes(storageRef, file).then((snapshot) => {
+          let uniqueKey = Date.now().toString();
+          let userInfo = {
+          box: false,
+          name: userName,
+          email: userEmail,
+          phone: userPhone,
+          classification: userClassification,
+          key: uniqueKey
+         };
+          localStorage.setItem(uniqueKey, JSON.stringify(userInfo));
+          $(".black-bg").removeClass("show");
+          window.location.href = "index.html";
+          console.log("Uploaded a blob or file!");
+        });
       });
-      // try {
-      //   const docRef = addDoc(collection(db, "users"), {
-      //     first: "Ada",
-      //     last: "Lovelace",
-      //     born: 1815,
-      //   });
-      //   console.log("Document written with ID: ", docRef.id);
-      // } catch (e) {
-      //   console.error("Error adding document: ", e);
-      // }})
-      //     try {
-      //       const docRef = await(collection(db, "employee"), {
-      //         name: userName,
-      //         email: userEmail,
-      //         phone: userPhone,
-      //         classification: userClassification,
-      //       });
-      //       console.log("Document written with ID: ", docRef.id);
-      //     } catch (e) {
-      //       console.error("Error adding document: ", e);
-      //     }
-      //   });
-      //   const docRef = addDoc(collection(db, "employee"), {
-      //     name: userName,
-      //     email: userEmail,
-      //     phone: userPhone,
-      //     classification: userClassification
-      //   })
 
+      // 적용되는것
       //   try {
       //     const docRef = await addDoc(collection(db, "employee"), {
-      //       first: "Ada",
-      //       last: "Lovelace",
-      //       born: 1815,
+      //       name: userName,
+      //       email: userEmail,
+      //       phone: userPhone,
+      //       classification: userClassification,
       //     });
       //     console.log("Document written with ID: ", docRef.id);
+      //     blackContainer.removeClass('show')
       //   } catch (e) {
       //     console.error("Error adding document: ", e);
       //   }
+      // });
+
       // 데이터 읽기
       //   const querySnapshot = await getDocs(collection(db, "product"));
       //   querySnapshot.forEach((doc) => {
@@ -179,5 +167,6 @@
       //   });
     </script>
     <script src="asset/js/btn.js"></script>
+    <script type="module" src="asset/js/employee.js"></script>
   </body>
 </html>

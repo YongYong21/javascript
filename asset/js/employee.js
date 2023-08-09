@@ -5,6 +5,7 @@ import {
   uploadBytes,
   listAll,
   getDownloadURL,
+  deleteObject,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 const firebaseConfig = {
   apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
@@ -56,11 +57,41 @@ allKeys.forEach((key) => {
       // xhr.send();
 
       // Or inserted into an <img> element
-      const img = $(`.${userInfo.name} #userimg`)
+      const img = $(`.${userInfo.name} #userimg`);
       img.attr("src", url);
-      console.log(img)
+      console.log(img);
     })
     .catch((error) => {
       console.log("이미지 가져오기 실패");
     });
 });
+
+$(".remove-btn").on("click", (e) => {
+  console.log("click");
+  allKeys.forEach((key) => {
+    let storedUserInfo = localStorage.getItem(key);
+
+    // JSON 형식의 사용자 정보를 객체로 변환
+    let userInfo = JSON.parse(storedUserInfo);
+
+    if ($(`.${userInfo.name} input`).prop("checked")) {
+      const storage = getStorage();
+
+      // Create a reference to the file to delete
+      const desertRef = ref(storage, `image/${userInfo.name}`);
+
+      // Delete the file
+      deleteObject(desertRef)
+        .then(() => {
+          // File deleted successfully
+        })
+        .catch((error) => {
+        });
+
+      localStorage.removeItem(key);
+    }
+  });
+  window.location.href = "index.html";
+});
+
+

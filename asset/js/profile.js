@@ -62,7 +62,7 @@ $(document).ready(function () {
             console.log("이미지 가져오기 실패");
           });
       } else {
-        getDownloadURL(ref(storage, `image/default.jpg`))
+        getDownloadURL(ref(storage, `image/default.png`))
           .then((url) => {
             const img = $(`#userimg`);
             img.attr("src", url);

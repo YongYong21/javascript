@@ -61,10 +61,11 @@ allKeys.forEach((key) => {
     });
   }
   else {
-    getDownloadURL(ref(storage, `image/default.jpg`))
+    getDownloadURL(ref(storage, `image/default.png`))
     .then((url) => {
       const img = $(`.${userInfo.name} #userimg`);
       img.attr("src", url);
+      
     })
     .catch((error) => {
       console.log('실패')

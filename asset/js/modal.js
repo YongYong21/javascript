@@ -9,6 +9,7 @@ import {
   getStorage,
   ref,
   uploadBytes,
+  deleteObject,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 const firebaseConfig = {
   apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
@@ -28,39 +29,51 @@ const storage = getStorage();
 $("form").on("submit", async (event) => {
   if ($(event.currentTarget)[0] === $(".edit-form")[0]) {
     event.preventDefault();
-    let targetValue = $('#user-name').text();
+    let targetValue = $("#user-name").text();
 
     // 모든 로컬 스토리지의 키를 순회
     for (let i = 0; i < localStorage.length; i++) {
       let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
       let value = JSON.parse(localStorage.getItem(key)); // 해당 키에 해당하는 값 가져오기
-      
+
       if (value.name === targetValue) {
         console.log("찾은 키:", key);
-        value.name = $('#name').val()
-        value.email = $('#email').val()
-        value.phone = $('#phone').val()
-        value.classification = $('#classification').val()
-        localStorage.setItem(key, JSON.stringify(value))
-        window.location.href = "index.html";
-      }
-      else {
-        console.log('없음')
+        let file = $("#img")[0].files[0];
+        value.name = $("#name").val();
+        value.email = $("#email").val();
+        value.phone = $("#phone").val();
+        value.classification = $("#classification").val();
+        let userImage = $("#img")[0].files[0] ? true : false;
+        value.hasImage = userImage;
+
+        const desertRef = ref(storage, `image/${value.key}`);
+        deleteObject(desertRef)
+          .then(() => {
+            const newImageRef = ref(storage, "image/" + value.key);
+
+            uploadBytes(newImageRef, file).then((snapshot) => {
+              localStorage.setItem(key, JSON.stringify(value));
+              window.location.href = "index.html";
+            });
+          })
+          .catch((error) => {});
+      } else {
+        console.log("없음");
       }
     }
   } else {
     event.preventDefault();
-  }
+
     let file = $("#img")[0].files[0];
     let userName = $("#name").val();
     let userEmail = $("#email").val();
     let userPhone = $("#phone").val();
     let userClassification = $("#classification").val();
     let uniqueKey = Date.now().toString();
-    let userImage = $("#img")[0].files[0] ? true : false
+    let userImage = $("#img")[0].files[0] ? true : false;
 
     const storageRef = ref(storage, "image/" + uniqueKey);
-    
+
     uploadBytes(storageRef, file).then((snapshot) => {
       let userInfo = {
         box: false,
@@ -69,13 +82,13 @@ $("form").on("submit", async (event) => {
         phone: userPhone,
         classification: userClassification,
         hasImage: userImage,
-        key: uniqueKey
+        key: uniqueKey,
       };
       localStorage.setItem(uniqueKey, JSON.stringify(userInfo));
       $(".black-bg").removeClass("show");
       window.location.href = "index.html";
     });
-    
+  }
 });
 
 // 적용되는것

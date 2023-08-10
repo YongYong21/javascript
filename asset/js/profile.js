@@ -17,7 +17,6 @@ const firebaseConfig = {
   measurementId: "G-RRXF3L5HP6",
 };
 
-
 // URL 매개변수 추출 함수
 function getParameterByName(name) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -45,24 +44,33 @@ $(document).ready(function () {
 
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
-  console.log(userName)
-  let targetValue = $('#user-name').text();
-
+  let targetValue = $("#user-name").text();
+  console.log(targetValue);
   // 모든 로컬 스토리지의 키를 순회
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
-    let value = JSON.parse(localStorage.getItem(key))
+    let value = JSON.parse(localStorage.getItem(key));
+    console.log(value.name);
     if (value.name === targetValue) {
-      getDownloadURL(ref(storage, `image/${key}`))
-    .then((url) => {
-      const img = $(`#userimg`);
-      img.attr("src", url);
-    })
-    .catch((error) => {
-      console.log("이미지 가져오기 실패");
-    });
+      if (value.hasImage) {
+        getDownloadURL(ref(storage, `image/${key}`))
+          .then((url) => {
+            const img = $(`#userimg`);
+            img.attr("src", url);
+          })
+          .catch((error) => {
+            console.log("이미지 가져오기 실패");
+          });
+      } else {
+        getDownloadURL(ref(storage, `image/default.jpg`))
+          .then((url) => {
+            const img = $(`#userimg`);
+            img.attr("src", url);
+          })
+          .catch((error) => {
+            console.log("이미지 가져오기 실패");
+          });
+      }
     }
   }
-
 });
-

@@ -26,8 +26,6 @@ const storage = getStorage();
 
 // 데이터 추가
 $("form").on("submit", async (event) => {
-  console.log($(event.currentTarget)[0]);
-  console.log($(".edit-form")[0]);
   if ($(event.currentTarget)[0] === $(".edit-form")[0]) {
     event.preventDefault();
     let targetValue = $('#user-name').text();
@@ -59,22 +57,25 @@ $("form").on("submit", async (event) => {
     let userPhone = $("#phone").val();
     let userClassification = $("#classification").val();
     let uniqueKey = Date.now().toString();
+    let userImage = $("#img")[0].files[0] ? true : false
+
     const storageRef = ref(storage, "image/" + uniqueKey);
+    
     uploadBytes(storageRef, file).then((snapshot) => {
-      
       let userInfo = {
-      box: false,
-      name: userName,
-      email: userEmail,
-      phone: userPhone,
-      classification: userClassification,
-      key: uniqueKey
-     };
+        box: false,
+        name: userName,
+        email: userEmail,
+        phone: userPhone,
+        classification: userClassification,
+        hasImage: userImage,
+        key: uniqueKey
+      };
       localStorage.setItem(uniqueKey, JSON.stringify(userInfo));
       $(".black-bg").removeClass("show");
       window.location.href = "index.html";
-      console.log("Uploaded a blob or file!");
     });
+    
 });
 
 // 적용되는것

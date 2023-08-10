@@ -39,8 +39,8 @@ allKeys.forEach((key) => {
 
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
-  
-  getDownloadURL(ref(storage, `image/${userInfo.key}`))
+  if(userInfo.hasImage){
+    getDownloadURL(ref(storage, `image/${userInfo.key}`))
     .then((url) => {
       // `url` is the download URL for 'images/stars.jpg'
 
@@ -52,14 +52,25 @@ allKeys.forEach((key) => {
       // };
       // xhr.open("GET", url);
       // xhr.send();
-
       // Or inserted into an <img> element
       const img = $(`.${userInfo.name} #userimg`);
       img.attr("src", url);
     })
     .catch((error) => {
-      console.log("이미지 가져오기 실패");
+      console.log('실패')
     });
+  }
+  else {
+    getDownloadURL(ref(storage, `image/default.jpg`))
+    .then((url) => {
+      const img = $(`.${userInfo.name} #userimg`);
+      img.attr("src", url);
+    })
+    .catch((error) => {
+      console.log('실패')
+    });
+  }
+
 });
 
 $(".remove-btn").on("click", (e) => {

@@ -2,8 +2,6 @@ const blackContainer = $('.black-bg');
 const closeBtn = $('.close');
 
 $('.add-btn').click(()=>{
-    console.log('asdasd')
-    console.log()
     blackContainer.addClass('show')
 })
 

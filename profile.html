@@ -13,6 +13,46 @@
     <link rel="stylesheet" href="asset/css/profile.css">
   </head>
   <body>
+    <div class="black-bg">
+        <div class="modal-container">
+          <h3>임직원 편집</h3>
+          <form class="edit-form">
+            <div class="input-container">
+              <div class="form-text-container">이름:</div>
+              <input type="text" name="" id="name" />
+            </div>
+  
+            <div class="input-container">
+              <div class="form-text-container">이메일:</div>
+              <input
+                type="email"
+                name=""
+                id="email"
+                placeholder="abc@google.com"
+              />
+            </div>
+  
+            <div class="input-container">
+              <div class="form-text-container">핸드폰번호:</div>
+              <input type="text" name="" id="phone" placeholder="01012345678" />
+            </div>
+  
+            <div class="input-container">
+              <div class="form-text-container">구분:</div>
+              <input type="text" name="" id="classification" placeholder="vip" />
+            </div>
+  
+            <div class="input-container">
+              <div class="form-text-container">이미지:</div>
+              <input type="file" name="" id="img" placeholder="" />
+            </div>
+            <div class="flex-wrap">
+              <button type="submit" class="submit-edit">수정하기</button>
+              <button type="button" class="close">닫기</button>
+            </div>
+          </form>
+        </div>
+      </div>
     <div class="employee-container">
       <div class="title-container">
         <div class="title">
@@ -24,7 +64,7 @@
         <div class="profile-left-container">
           <div class="profile-title-container flex-wrap">
             <h3>임직원 정보</h3>
-            <button class="edit-btn">임직원 편집</button>
+            <button class="add-btn edit-btn">임직원 편집</button>
           </div>
           <div class="userInfo-container-detail">
             <div class="userInfo-wrap">
@@ -56,7 +96,8 @@
         </div>
       </div>
     </div>
-
+    <script type="module" src="asset/js/modal.js"></script>
+    <script src="asset/js/btn.js"></script>
     <script type="module" src="asset/js/profile.js"></script>
   </body>
 </html>

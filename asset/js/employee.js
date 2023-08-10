@@ -37,11 +37,10 @@ allKeys.forEach((key) => {
 </tr>`;
   $("tbody").append(userList);
 
-  // 여기에 필요한 작업을 추가
-
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
-  getDownloadURL(ref(storage, `image/${userInfo.name}`))
+  
+  getDownloadURL(ref(storage, `image/${userInfo.key}`))
     .then((url) => {
       // `url` is the download URL for 'images/stars.jpg'
 
@@ -73,7 +72,7 @@ $(".remove-btn").on("click", (e) => {
       const storage = getStorage();
 
       // Create a reference to the file to delete
-      const desertRef = ref(storage, `image/${userInfo.name}`);
+      const desertRef = ref(storage, `image/${userInfo.key}`);
 
       // Delete the file
       deleteObject(desertRef)

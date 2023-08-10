@@ -34,7 +34,10 @@ $(document).ready(function () {
     getParameterByName("classification")
   );
 
-  
+  $("#name").val(userName);
+  $("#email").val(userEmail);
+  $("#phone").val(userPhone);
+  $("#classification").val(userClassification);
   $("#user-name").text(userName);
   $("#user-email").text(userEmail);
   $("#user-phone").text(userPhone);
@@ -43,7 +46,14 @@ $(document).ready(function () {
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
   console.log(userName)
-  getDownloadURL(ref(storage, `image/${userName}`))
+  let targetValue = $('#user-name').text();
+
+  // 모든 로컬 스토리지의 키를 순회
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
+    let value = JSON.parse(localStorage.getItem(key))
+    if (value.name === targetValue) {
+      getDownloadURL(ref(storage, `image/${key}`))
     .then((url) => {
       const img = $(`#userimg`);
       img.attr("src", url);
@@ -51,4 +61,8 @@ $(document).ready(function () {
     .catch((error) => {
       console.log("이미지 가져오기 실패");
     });
+    }
+  }
+
 });
+

@@ -118,6 +118,9 @@ input:focus {
     overflow: hidden;
     border: 0;
 }
+tbody tr {
+    height: 120px;
+}
 tbody td img {
     width: 100px;
     height: 100px;

@@ -44,17 +44,17 @@ $(document).ready(function () {
 
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
-  let targetValue = $("#user-name").text();
-  console.log(targetValue);
+  let targetName = userName
+  let targetEmail = userEmail
   // 모든 로컬 스토리지의 키를 순회
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
     let value = JSON.parse(localStorage.getItem(key));
-    console.log(value.name);
-    if (value.name === targetValue) {
+    if (value.name === targetName && value.email === targetEmail) {
       if (value.hasImage) {
         getDownloadURL(ref(storage, `image/${key}`))
           .then((url) => {
+            console.log(key)
             const img = $(`#userimg`);
             img.attr("src", url);
           })

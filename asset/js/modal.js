@@ -43,20 +43,27 @@ $("form").on("submit", async (event) => {
         value.email = $("#email").val();
         value.phone = $("#phone").val();
         value.classification = $("#classification").val();
-        let userImage = $("#img")[0].files[0] ? true : false;
-        value.hasImage = userImage;
 
-        const desertRef = ref(storage, `image/${value.key}`);
-        deleteObject(desertRef)
-          .then(() => {
-            const newImageRef = ref(storage, "image/" + value.key);
+        if ($('input[type="file"].none').length > 0)  {
+          localStorage.setItem(key, JSON.stringify(value));
+          window.location.href = "index.html";
+        } 
+        else {
+          let userImage = $("#img")[0].files[0] ? true : false;
+          value.hasImage = userImage;
+          const desertRef = ref(storage, `image/${value.key}`);
 
-            uploadBytes(newImageRef, file).then((snapshot) => {
-              localStorage.setItem(key, JSON.stringify(value));
-              window.location.href = "index.html";
-            });
-          })
-          .catch((error) => {});
+          deleteObject(desertRef)
+            .then(() => {
+              const newImageRef = ref(storage, "image/" + value.key);
+
+              uploadBytes(newImageRef, file).then((snapshot) => {
+                localStorage.setItem(key, JSON.stringify(value));
+                window.location.href = "index.html";
+              });
+            })
+            .catch((error) => {});
+        }
       } else {
         console.log("없음");
       }
@@ -89,6 +96,10 @@ $("form").on("submit", async (event) => {
       window.location.href = "index.html";
     });
   }
+});
+
+$(".changeImage").on("click", (e) => {
+  $("#img").toggleClass("none");
 });
 
 // 적용되는것

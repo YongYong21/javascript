@@ -62,8 +62,8 @@ function listEmployees(startIndex, endIndex) {
     <td><button class='profile-btn'>프로필 보기</button></td>
     </tr>`;
       $("tbody").append(userList);
-    
-    
+
+      
       if(userInfo.hasImage){
         getDownloadURL(ref(storage, `image/${userInfo.key}`))
         .then((url) => {
@@ -79,7 +79,7 @@ function listEmployees(startIndex, endIndex) {
           // xhr.send();
           // Or inserted into an <img> element
           const img = $(`#${userInfo.key}`);
-          console.log(userInfo.key)
+
           img.attr("src", url);
         })
         .catch((error) => {
@@ -98,6 +98,22 @@ function listEmployees(startIndex, endIndex) {
         });
       }
   }
+  $(".profile-btn").on("click", function (event) {
+    const row = $(this).closest("tr");
+  
+    const userName = row.find("td:nth-child(3) span").text();
+    const userEmail = row.find("td:nth-child(4) span").text();
+    const userPhone = row.find("td:nth-child(5) span").text();
+    const userClassification = row.find("td:nth-child(6) span").text();
+  
+    const profileUrl = `profile.html?name=${encodeURIComponent(
+      userName
+    )}&email=${encodeURIComponent(userEmail)}&phone=${encodeURIComponent(
+      userPhone
+    )}&classification=${encodeURIComponent(userClassification)}`;
+  
+    window.location.href = profileUrl;
+  });
 }
 
 // 추가 데이터를 가져오는 함수
@@ -196,20 +212,20 @@ $(".remove-btn").on("click", (e) => {
 });
 
 
-// 프로필 버튼 클릭 이벤트 핸들러
-$(".profile-btn").on("click", function (event) {
-  const row = $(this).closest("tr");
+// // 프로필 버튼 클릭 이벤트 핸들러
+// $(".profile-btn").on("click", function (event) {
+//   const row = $(this).closest("tr");
 
-  const userName = row.find("td:nth-child(3) span").text();
-  const userEmail = row.find("td:nth-child(4) span").text();
-  const userPhone = row.find("td:nth-child(5) span").text();
-  const userClassification = row.find("td:nth-child(6) span").text();
+//   const userName = row.find("td:nth-child(3) span").text();
+//   const userEmail = row.find("td:nth-child(4) span").text();
+//   const userPhone = row.find("td:nth-child(5) span").text();
+//   const userClassification = row.find("td:nth-child(6) span").text();
 
-  const profileUrl = `profile.html?name=${encodeURIComponent(
-    userName
-  )}&email=${encodeURIComponent(userEmail)}&phone=${encodeURIComponent(
-    userPhone
-  )}&classification=${encodeURIComponent(userClassification)}`;
+//   const profileUrl = `profile.html?name=${encodeURIComponent(
+//     userName
+//   )}&email=${encodeURIComponent(userEmail)}&phone=${encodeURIComponent(
+//     userPhone
+//   )}&classification=${encodeURIComponent(userClassification)}`;
 
-  window.location.href = profileUrl;
-});
+//   window.location.href = profileUrl;
+// });

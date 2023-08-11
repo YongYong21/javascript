@@ -25,6 +25,12 @@ input:focus {
     display: flex;
     justify-content: space-between;
 }
+.block {
+    display: block;
+}
+.none {
+    display: none;
+}
 .employee-container {
     width: 100%;
     height: auto;

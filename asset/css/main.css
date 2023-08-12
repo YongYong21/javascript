@@ -58,28 +58,13 @@ input:focus {
     color: #888;
 }
 .search-container {
-    width: 25%;
+    width: 20%;
     display: flex;
     border: 2px solid #ddd;
     border-radius: 5px;
     padding: 10px;
 }
-.employee-table {
-    width: 100%;
-    height: auto;
-    margin-top: 32px;
-    
-}
-.employee-table {
-    text-align: center;
-    color: #888;
-    border-collapse: collapse;
-}
-.employee-table th {
-    padding: 16px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
+
 
 .black-bg {
     width: 100%;
@@ -100,7 +85,7 @@ input:focus {
 }
 .modal-container {
     display : block;
-    width: 25%;
+    width: 20%;
     margin: 0 auto;
     background-color: white;
     border-radius: 5px;
@@ -123,6 +108,21 @@ input:focus {
 .input-container input[type="file"] {  
     overflow: hidden;
     border: 0;
+}
+.employee-table {
+    width: 100%;
+    height: auto;
+    margin-top: 32px;
+    text-align: center;
+    color: #888;
+    border-collapse: collapse;
+    
+}
+
+.employee-table th {
+    padding: 1rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 tbody tr {
     height: 120px;

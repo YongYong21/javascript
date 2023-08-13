@@ -34,6 +34,7 @@ Firebase
 
 
 ## User Flow
+![userflow](https://github.com/YongYong21/javascript/assets/90038848/83e8691e-1d24-4fe3-98aa-4b649f635e9b)
 
 
 ## 어려웠던 점

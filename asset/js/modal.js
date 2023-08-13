@@ -1,45 +1,21 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  deleteObject,
-} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
-  authDomain: "fastcampusjavascript.firebaseapp.com",
-  projectId: "fastcampusjavascript",
-  storageBucket: "fastcampusjavascript.appspot.com",
-  messagingSenderId: "741337754815",
-  appId: "1:741337754815:web:c0cd01444983c91fe76a0a",
-  measurementId: "G-RRXF3L5HP6",
-};
+import { storage, ref, uploadBytes, deleteObject } from "./firebase.js";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage();
+const blackContainer = $(".black-bg");
+const closeBtn = $(".close");
+// 모달창 열고 닫기 리스너
+$(".add-btn").click(() => {
+  blackContainer.addClass("show");
+});
 
-const blackContainer = $('.black-bg');
-const closeBtn = $('.close');
-
-$('.add-btn').click(()=>{
-    blackContainer.addClass('show')
-})
-
-blackContainer.click(((e)=>{
-    if($(e.target).is($(blackContainer)) || $(e.target).is($(closeBtn))){
-        blackContainer.removeClass('show')
-    }
-}))
+blackContainer.click((e) => {
+  if ($(e.target).is($(blackContainer)) || $(e.target).is($(closeBtn))) {
+    blackContainer.removeClass("show");
+  }
+});
 
 // 데이터 추가
 $("form").on("submit", async (event) => {
+  // 모달창이 편집창이라면
   if ($(event.currentTarget)[0] === $(".edit-form")[0]) {
     event.preventDefault();
     let targetValue = $("#user-name").text();
@@ -56,16 +32,15 @@ $("form").on("submit", async (event) => {
         value.email = $("#email").val();
         value.phone = $("#phone").val();
         value.classification = $("#classification").val();
-
-        if ($('input[type="file"].none').length > 0)  {
+        // 파일창이 안보일경우(이미지 바꾸기 희망 X)
+        if ($('input[type="file"].none').length > 0) {
           localStorage.setItem(key, JSON.stringify(value));
           window.location.href = "index.html";
-        } 
-        else {
-          let userImage = $("#img")[0].files[0] ? true : false;
+        } else { // 이미지 바꾸기 체크가 되었다면
+          let userImage = $("#img")[0].files[0] ? true : false; // 이미지 파일의 유무
           value.hasImage = userImage;
           const desertRef = ref(storage, `image/${value.key}`);
-
+          // 기존 이미지 삭제하고 업로드
           deleteObject(desertRef)
             .then(() => {
               const newImageRef = ref(storage, "image/" + value.key);
@@ -111,33 +86,7 @@ $("form").on("submit", async (event) => {
   }
 });
 
+// 편집창 이미지 바꾸기 체크박스 
 $(".changeImage").on("click", (e) => {
   $("#img").toggleClass("none");
 });
-
-// 적용되는것
-//   try {
-//     const docRef = await addDoc(collection(db, "employee"), {
-//       name: userName,
-//       email: userEmail,
-//       phone: userPhone,
-//       classification: userClassification,
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-//     blackContainer.removeClass('show')
-//   } catch (e) {
-//     console.error("Error adding document: ", e);
-//   }
-// });
-
-// 데이터 읽기
-//   const querySnapshot = await getDocs(collection(db, "product"));
-//   querySnapshot.forEach((doc) => {
-//     const data = doc.data();
-//     const productId = doc.id;
-//     const productName = data.제목; // "제목" 필드의 값을 가져옴
-//     const productPrice = data.가격; // "가격" 필드의 값을 가져옴
-//     console.log(`상품 ID: ${productId}`);
-//     console.log(`상품 이름: ${productName}`);
-//     console.log(`상품 가격: ${productPrice}`);
-//   });

@@ -1,22 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  listAll,
-  getDownloadURL,
-  deleteObject,
-} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyBulLEBUR9SUKd6YZgFdcp3zArHVZFyhdU",
-  authDomain: "fastcampusjavascript.firebaseapp.com",
-  projectId: "fastcampusjavascript",
-  storageBucket: "fastcampusjavascript.appspot.com",
-  messagingSenderId: "741337754815",
-  appId: "1:741337754815:web:c0cd01444983c91fe76a0a",
-  measurementId: "G-RRXF3L5HP6",
-};
-
+import { getStorage, ref, getDownloadURL } from "./firebase.js";
 // URL 매개변수 추출 함수
 function getParameterByName(name) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -42,10 +24,9 @@ $(document).ready(function () {
   $("#user-phone").text(userPhone);
   $("#user-classification").text(userClassification);
 
-  const app = initializeApp(firebaseConfig);
   const storage = getStorage();
-  let targetName = userName
-  let targetEmail = userEmail
+  let targetName = userName;
+  let targetEmail = userEmail;
   // 모든 로컬 스토리지의 키를 순회
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
@@ -54,7 +35,7 @@ $(document).ready(function () {
       if (value.hasImage) {
         getDownloadURL(ref(storage, `image/${key}`))
           .then((url) => {
-            console.log(key)
+            console.log(key);
             const img = $(`#userimg`);
             img.attr("src", url);
           })

@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="asset/css/profile.css">
   </head>
   <body>
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
     <div class="black-bg">
         <div class="modal-container">
           <h3>임직원 편집</h3>
@@ -60,7 +63,7 @@
         <div class="title">
           <h1>임직원상세</h1>
         </div>
-        <div class="login">로그인</div>
+        <!-- <div class="login">로그인</div> -->
       </div>
       <div class="userInfo-container">
         <div class="profile-left-container">
@@ -99,7 +102,11 @@
       </div>
     </div>
     <script type="module" src="asset/js/modal.js"></script>
-    <script src="asset/js/btn.js"></script>
     <script type="module" src="asset/js/profile.js"></script>
+    <script>
+      $(window).on("load", function () {
+        $('.loader-container').css('display', 'none')
+      });
+    </script>
   </body>
 </html>

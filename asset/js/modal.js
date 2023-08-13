@@ -25,6 +25,19 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage();
 
+const blackContainer = $('.black-bg');
+const closeBtn = $('.close');
+
+$('.add-btn').click(()=>{
+    blackContainer.addClass('show')
+})
+
+blackContainer.click(((e)=>{
+    if($(e.target).is($(blackContainer)) || $(e.target).is($(closeBtn))){
+        blackContainer.removeClass('show')
+    }
+}))
+
 // 데이터 추가
 $("form").on("submit", async (event) => {
   if ($(event.currentTarget)[0] === $(".edit-form")[0]) {

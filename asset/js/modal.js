@@ -32,6 +32,12 @@ $("form").on("submit", async (event) => {
         value.email = $("#email").val();
         value.phone = $("#phone").val();
         value.classification = $("#classification").val();
+        // 공란 여부 체크
+        if(value.name==='' || value.email==='' || value.phone==='' || value.classification===''){
+          alert('공란이 있습니다.')
+          return ;
+        }
+
         // 파일창이 안보일경우(이미지 바꾸기 희망 X)
         if ($('input[type="file"].none').length > 0) {
           localStorage.setItem(key, JSON.stringify(value));
@@ -67,6 +73,10 @@ $("form").on("submit", async (event) => {
     let uniqueKey = Date.now().toString();
     let userImage = $("#img")[0].files[0] ? true : false;
 
+    if(userName==='' || userEmail==='' || userPhone==='' || userClassification===''){
+      alert('공란이 있습니다.')
+      return ;
+    }
     const storageRef = ref(storage, "image/" + uniqueKey);
 
     uploadBytes(storageRef, file).then((snapshot) => {

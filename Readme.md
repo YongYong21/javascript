@@ -5,6 +5,7 @@ HTML, CSS, JavaScript
 
 ## 라이브러리
 jquery
+<br>
 Firebase
 
 ## 기능 구현
@@ -29,12 +30,12 @@ Firebase
 * 검색 기능
 * 사진 편집 기능
 
-## 유의사항
-* 초기 데이터를 적게 생성
-
-
 ## User Flow
 ![userflow](https://github.com/YongYong21/javascript/assets/90038848/83e8691e-1d24-4fe3-98aa-4b649f635e9b)
+
+
+## 유의사항
+* 초기 데이터를 적게 생성
 
 
 ## 어려웠던 점

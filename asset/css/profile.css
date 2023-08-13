@@ -13,6 +13,9 @@
     border-bottom: 2px solid #666;
     margin-bottom: 16px;
 }
+.edit-btn {
+    background-color: #333;
+}
 .userInfo-wrap {
     display: flex;
     padding: 8px;

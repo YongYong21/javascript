@@ -34,12 +34,13 @@ Firebase
 * 사진 편집 기능
 
 ## User Flow
-![유저플로우](https://github.com/YongYong21/javascript/assets/90038848/bcb05e69-37d2-4c35-a238-560b807c4ff9)
+![유저플로우](https://github.com/YongYong21/javascript/assets/90038848/8d916efe-83ff-4788-b5cc-111792c25d87)
 
 ## 화면
-<img width="964" alt="1" src="https://github.com/YongYong21/javascript/assets/90038848/e262d008-9e46-48c1-9c38-915a99b12416">
-<img width="959" alt="2" src="https://github.com/YongYong21/javascript/assets/90038848/5966af7f-ccf8-4f09-b1bf-ecedc679e2d2">
-<img width="969" alt="3" src="https://github.com/YongYong21/javascript/assets/90038848/7fa6c9dd-ae7f-44c4-87d7-9bd15a0cb31a">
+<img width="964" alt="1" src="https://github.com/YongYong21/javascript/assets/90038848/fc8d8e25-9530-4710-a15c-b46a756c7e7a">
+<img width="959" alt="2" src="https://github.com/YongYong21/javascript/assets/90038848/f9ef9e3f-9b17-4f0e-b9b1-a0f26006e6ea">
+
+<img width="969" alt="3" src="https://github.com/YongYong21/javascript/assets/90038848/eb6d2356-01aa-4892-bea3-3dd2d6cd41ff">
 
 
 ## 유의사항

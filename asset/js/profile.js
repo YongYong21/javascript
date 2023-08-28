@@ -5,6 +5,20 @@ function getParameterByName(name) {
   return urlParams.get(name);
 }
 
+function loadImage(key, hasImage) {
+
+  const imageRef = hasImage
+    ? ref(storage, `image/${key}`)
+    : ref(storage, "image/default.png");
+  
+  return getDownloadURL(imageRef)
+    .then((url) => {
+      const img = $(`#userimg`);
+      img.attr("src", url);
+    })
+    .catch((error) => console.log("이미지 가져오기 실패"));
+}
+
 // 페이지 로드 시 실행될 코드
 $(document).ready(function () {
   // URL 매개변수에서 정보 추출
@@ -28,30 +42,25 @@ $(document).ready(function () {
   let targetName = userName;
   let targetEmail = userEmail;
   // 모든 로컬 스토리지의 키를 순회
+  function loadImage(key, hasImage) {
+
+    const imageRef = hasImage
+      ? ref(storage, `image/${key}`)
+      : ref(storage, "image/default.png");
+    
+    return getDownloadURL(imageRef)
+      .then((url) => {
+        const img = $(`#userimg`);
+        img.attr("src", url);
+      })
+      .catch((error) => console.log("이미지 가져오기 실패"));
+  }
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i); // 특정 인덱스의 키 가져오기
     let value = JSON.parse(localStorage.getItem(key));
     if (value.name === targetName && value.email === targetEmail) {
-      if (value.hasImage) {
-        getDownloadURL(ref(storage, `image/${key}`))
-          .then((url) => {
-            console.log(key);
-            const img = $(`#userimg`);
-            img.attr("src", url);
-          })
-          .catch((error) => {
-            console.log("이미지 가져오기 실패");
-          });
-      } else {
-        getDownloadURL(ref(storage, `image/default.png`))
-          .then((url) => {
-            const img = $(`#userimg`);
-            img.attr("src", url);
-          })
-          .catch((error) => {
-            console.log("이미지 가져오기 실패");
-          });
-      }
+      loadImage(key, value.hasImage);
     }
   }
 });
+

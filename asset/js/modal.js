@@ -15,9 +15,9 @@ blackContainer.click((e) => {
 
 // 데이터 추가
 $("form").on("submit", async (event) => {
+  event.preventDefault();
   // 모달창이 편집창이라면
   if ($(event.currentTarget)[0] === $(".edit-form")[0]) {
-    event.preventDefault();
     let targetValue = $("#user-name").text();
 
     // 모든 로컬 스토리지의 키를 순회
@@ -63,7 +63,7 @@ $("form").on("submit", async (event) => {
       }
     }
   } else {
-    event.preventDefault();
+    
 
     let file = $("#img")[0].files[0];
     let userName = $("#name").val();

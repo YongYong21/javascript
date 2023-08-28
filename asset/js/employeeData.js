@@ -34,23 +34,20 @@ let englishNames = [
 
 // 무작위 핸드폰 번호 생성
 function getRandomPhoneNumber() {
-  var phoneNumber = "010";
-  for (var i = 0; i < 8; i++) {
-    phoneNumber += Math.floor(Math.random() * 10); // 0부터 9 사이의 숫자 추가
-  }
+  const phoneNumber = `010${Math.random().toString().slice(2, 10)}`;
   return phoneNumber;
 }
 
-var randomPhoneNumbers = [];
+let randomPhoneNumbers = [];
 
-for (var i = 0; i < englishNames.length; i++) {
-  var randomPhoneNumber = getRandomPhoneNumber();
+for (let i = 0; i < englishNames.length; i++) {
+  let randomPhoneNumber = getRandomPhoneNumber();
   randomPhoneNumbers.push(randomPhoneNumber);
 }
 // 첫접속이면
 if (!hasExecuted) {
   const promises = [];
-
+  
   for (let i = 0; i < englishNames.length; i++) {
     let uniqueKey = Date.now().toString();
     const storageRef = ref(storage, "image/" + uniqueKey);
@@ -65,14 +62,13 @@ if (!hasExecuted) {
         key: uniqueKey,
       };
       localStorage.setItem(uniqueKey, JSON.stringify(userInfo));
+      
     });
-
     promises.push(uploadPromise);
   }
 
   // 모든 업로드가 완료된 후에 실행되도록 코드 추가
-  Promise.all(promises).then(() => {
-    localStorage.setItem("hasExecuted", true);
-    window.location.href = "index.html";
-  });
+  await Promise.all(promises);
+  localStorage.setItem("hasExecuted", true);
+  window.location.href = "index.html";
 }

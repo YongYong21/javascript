@@ -28,7 +28,7 @@ window.addEventListener("scroll", () => {
     loadMoreEmployees();
   }
 });
-function createUserRow(data){
+function createUserRow(data) {
   return `
     <tr data-name="${data.name}">
       <td class='check'><input type="checkbox"></td>
@@ -39,7 +39,7 @@ function createUserRow(data){
       <td><span>${data.classification}</span></td>
       <td><button class='profile-btn'>View Profile</button></td>
     </tr>`;
-};
+}
 
 // 유저 로드
 function loadUser(data) {
@@ -139,7 +139,6 @@ $(".remove-btn").on("click", () => {
       } catch {
         console.log("삭제 실패");
       }
-
     }
   });
   Promise.all(promises)
